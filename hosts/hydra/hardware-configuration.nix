@@ -8,17 +8,43 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usb_storage" "uas" "sd_mod" ];
+  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
+    { device = "tmpfs";
+      fsType = "tmpfs";
+    };
+
+  fileSystems."/iso" =
+    { device = "/dev/disk/by-uuid/1980-01-01-00-00-00-00";
+      fsType = "iso9660";
+    };
+
+  fileSystems."/nix/.ro-store" =
+    { device = "/iso/nix-store.squashfs";
+      fsType = "squashfs";
+      options = [ "loop" ];
+    };
+
+  fileSystems."/nix/.rw-store" =
+    { device = "tmpfs";
+      fsType = "tmpfs";
+    };
+
+  fileSystems."/nix/store" =
+    { device = "overlay";
+      fsType = "overlay";
+    };
+
+  fileSystems."/mnt" =
     { device = "/dev/disk/by-uuid/dda67a32-a0df-441d-8158-cb26be307de1";
       fsType = "btrfs";
     };
 
-  fileSystems."/boot" =
+  fileSystems."/mnt/boot" =
     { device = "/dev/disk/by-uuid/E566-EE8A";
       fsType = "vfat";
       options = [ "fmask=0077" "dmask=0077" ];
