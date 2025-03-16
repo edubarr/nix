@@ -2,7 +2,7 @@
   networking.networkmanager.enable = true;
   networking.firewall={
     enable = true;
-    allowedTCPPorts = [ 80 443 ];
+    allowedTCPPorts = [ 22 80 443 ];
   };
 
   security.acme = {
