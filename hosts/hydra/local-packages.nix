@@ -1,6 +1,6 @@
 { pkgs, ... }:
 {
   environment.systemPackages = [ 
-    mergerfs
+    pkgs.mergerfs
   ];
 }
