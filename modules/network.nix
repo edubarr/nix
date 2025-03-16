@@ -5,6 +5,9 @@
     allowedTCPPorts = [ 22 80 443 ];
   };
 
+  # Enable the SSH server
+  services.openssh.enable = true;
+
   security.acme = {
     acceptTerms = true;
     defaults.email = "eduaraujobarros@example.com";  # update to your real email
