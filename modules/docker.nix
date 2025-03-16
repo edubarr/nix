@@ -1,3 +1,4 @@
+{ pkgs, ... }:
 {
   # enable docker
   # use docker without Root access (Rootless docker)
