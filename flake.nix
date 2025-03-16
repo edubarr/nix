@@ -15,7 +15,7 @@
 
     let
       system = "x86_64-linux";
-      version = "24.11";
+      version = "25.05";
 
       homeStateVersion = version;
       user = "edubarr";
