@@ -10,7 +10,7 @@
 
   security.acme = {
     acceptTerms = true;
-    defaults.email = "eduaraujobarros@example.com";  # update to your real email
+    defaults.email = "eduaraujobarros@gmail.com";  # update to your real email
   };
 
   services.nginx = {
