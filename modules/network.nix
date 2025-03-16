@@ -5,6 +5,11 @@
     allowedTCPPorts = [ 80 443 ];
   };
 
+  security.acme = {
+    acceptTerms = true;
+    defaults.email = "eduaraujobarros@example.com";  # update to your real email
+  };
+
   services.nginx = {
     enable = true;
     recommendedProxySettings = true;
