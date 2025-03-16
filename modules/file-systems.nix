@@ -32,8 +32,6 @@
       "fsname=mergerfs"
       "allow_other"
     ];
-    dump = 0;
-    pass = 0;
   };
 
   # Bind mount servarr from its source directory (adjust source path as needed)
