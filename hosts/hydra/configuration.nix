@@ -4,6 +4,7 @@
     ./hardware-configuration.nix
     ./local-packages.nix
     ../../modules
+    ../../modules/smb.nix
   ];
 
   networking.hostName = hostname;
