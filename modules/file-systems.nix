@@ -40,12 +40,12 @@
     ];
   };
 
-  # # Bind mount servarr from its source directory (adjust source path as needed)
-  # fileSystems."/media/servarr" = {
-  #   device = "/media/hd0/servarr_config";
-  #   fsType = "none";
-  #   options = [ "bind" ];
-  # };
+  # Bind mount servarr from its source directory (adjust source path as needed)
+  fileSystems."/media/servarr" = {
+    device = "/media/hd0/servarr_config";
+    fsType = "none";
+    options = [ "bind" ];
+  };
 
   # Ensure directories are created at boot
   systemd.tmpfiles.rules = [
