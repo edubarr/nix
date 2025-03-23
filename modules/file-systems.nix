@@ -23,14 +23,14 @@
     options = [ "defaults" ];
   };
 
-  fileSystems."/media/hd4" = {
-    device = "UUID=b5fb7a72-96e5-4410-a87e-d1122fb38e8e";
-    fsType = "ext4";
-    options = [ "defaults" ];
-  };
+  # fileSystems."/media/hd4" = {
+  #   device = "UUID=b5fb7a72-96e5-4410-a87e-d1122fb38e8e";
+  #   fsType = "ext4";
+  #   options = [ "defaults" ];
+  # };
 
   fileSystems."/media/all" = {
-    device = "/media/hd0/share:/media/hd1/share:/media/hd2/share:/media/hd3/share:/media/hd4/share";
+    device = "/media/hd0/share:/media/hd1/share:/media/hd2/share:/media/hd3/share"; #:/media/hd4/share";
     fsType = "fuse.mergerfs";
     options = [
       "category.create=epmfs"
