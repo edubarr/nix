@@ -42,7 +42,7 @@
 
   # Bind mount servarr from its source directory (adjust source path as needed)
   fileSystems."/media/servarr" = {
-    device = "/media/hd0/servarr_config";
+    device = "/media/hd0/share/servarr_config";
     fsType = "none";
     options = [ "bind" ];
   };
