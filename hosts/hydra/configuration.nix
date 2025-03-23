@@ -5,6 +5,7 @@
     ./local-packages.nix
     ../../modules
     ../../modules/smb.nix
+    ../../modules/cockpit.nix
   ];
 
   networking.hostName = hostname;
