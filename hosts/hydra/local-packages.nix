@@ -1,8 +1,9 @@
 { pkgs, ... }:
 {
-  environment.systemPackages = [ 
-    pkgs.mergerfs
-    pkgs.git
-    pkgs.htop
+  environment.systemPackages = with pkgs; [ 
+    mergerfs
+    git
+    htop
+    screen
   ];
 }
