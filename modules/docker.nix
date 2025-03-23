@@ -19,8 +19,8 @@
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
       WorkingDirectory = "/media/servarr";
-      ExecStart = "${pkgs.docker-compose}/bin/docker-compose -f docker-compose.yaml up -d";
-      ExecStop = "${pkgs.docker-compose}/bin/docker-compose -f docker-compose.yaml down";
+      ExecStart = "${pkgs.docker-compose}/bin/docker-compose -f compose.yaml up -d";
+      ExecStop = "${pkgs.docker-compose}/bin/docker-compose -f compose.yaml down";
       Restart = "on-failure";
     };
   };
