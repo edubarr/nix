@@ -23,14 +23,19 @@
     options = [ "defaults" "nofail" ];
   };
 
-  fileSystems."/media/hd4" = {
-    device = "UUID=b5fb7a72-96e5-4410-a87e-d1122fb38e8e";
-    fsType = "ext4";
-    options = [ "defaults" "nofail" ];
-  };
+  # fileSystems."/media/hd4" = {
+  #   device = "UUID=b5fb7a72-96e5-4410-a87e-d1122fb38e8e";
+  #   fsType = "ext4";
+  #   options = [ "defaults" "nofail" ];
+  # };
 
   fileSystems."/media/all" = {
-    device = "/media/hd0/share:/media/hd2/share:/media/hd3/share:/media/hd4/share";
+    depends = [
+      "/media/hd0"
+      "/media/hd2"
+      "/media/hd3"
+    ];
+    device = "/media/hd0/share:/media/hd2/share:/media/hd3/share";
     fsType = "fuse.mergerfs";
     options = [
       "category.create=epmfs"
@@ -41,8 +46,11 @@
     ];
   };
 
-  # Bind mount servarr from its source directory (adjust source path as needed)
+  # Bind mount servarr from its source directory on hd0
   fileSystems."/media/servarr" = {
+    depends = [
+      "/media/hd0"
+  ];
     device = "/media/hd0/share/servarr_config";
     fsType = "none";
     options = [ "bind" "nofail" ];
