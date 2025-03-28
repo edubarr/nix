@@ -4,7 +4,7 @@
     defaults = {
       email = "eduaraujobarros@gmail.com";
       dnsProvider = "cloudflare";
-      credentialsFile = "/var/lib/acme/cloudflare-credentials";
+      environmentFile = "/var/lib/acme/cloudflare-credentials";
       dnsResolver = "1.1.1.1:53";
       dnsPropagationCheck = true;
     };
