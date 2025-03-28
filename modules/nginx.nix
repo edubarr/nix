@@ -11,8 +11,6 @@
     enable = true;
     recommendedProxySettings = true;
     recommendedTlsSettings = true;
-    # Enable IPv6
-    enableIPv6 = true;
     
     virtualHosts."plex.dudu.lat" = {
       enableACME = true;
