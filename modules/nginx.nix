@@ -1,7 +1,11 @@
 {
   security.acme = {
     acceptTerms = true;
-    defaults.email = "eduaraujobarros@gmail.com";
+    defaults = {
+      email = "eduaraujobarros@gmail.com";
+      dnsProvider = "cloudflare";
+      credentialsFile = "/var/lib/secrets/cloudflare-credentials";
+    };
   };
 
   services.nginx = {
@@ -19,15 +23,11 @@
         { addr = "[::]"; port = 80; }
         { addr = "[::]"; port = 443; ssl = true; }
       ];
-
+      
       locations."/" = {
-          root = "/var/www";
-        };
-
-      # locations."/" = {
-      #   proxyPass = "http://127.0.0.1:32400";
-      #   proxyWebsockets = true;
-      # };
+        proxyPass = "http://127.0.0.1:32400";
+        proxyWebsockets = true;
+      };
     };
   };
 }
