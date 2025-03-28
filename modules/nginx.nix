@@ -1,7 +1,7 @@
 {
   security.acme = {
     acceptTerms = true;
-    defaults = {
+    certs."plex.dudu.lat" = {
       email = "eduaraujobarros@gmail.com";
       dnsProvider = "cloudflare";
       environmentFile = "/var/lib/acme/cloudflare-credentials";
@@ -16,6 +16,7 @@
     recommendedTlsSettings = true;
     
     virtualHosts."plex.dudu.lat" = {
+      useACMEHost = "plex.dudu.lat";
       enableACME = true;
       forceSSL = true;
       # Listen on IPv6 as well
