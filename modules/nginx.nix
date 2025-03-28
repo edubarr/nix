@@ -4,7 +4,7 @@
     defaults = {
       email = "eduaraujobarros@gmail.com";
       dnsProvider = "cloudflare";
-      credentialsFile = "/home/edubarr/secrets/cloudflare-credentials";
+      credentialsFile = "/var/lib/acme/cloudflare-credentials";
     };
   };
 
