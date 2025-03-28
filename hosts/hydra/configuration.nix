@@ -6,6 +6,7 @@
     ../../modules
     ../../modules/smb.nix
     ../../modules/cockpit.nix
+    ../../modules/nginx.nix
   ];
 
   networking.hostName = hostname;
