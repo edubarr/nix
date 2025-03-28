@@ -25,10 +25,6 @@
         { addr = "[::]"; port = 80; }
         { addr = "[::]"; port = 443; ssl = true; }
       ];
-
-      locations."/.well-known/acme-challenge" = {
-        root = "/var/lib/acme/acme-challenge/.well-known/acme-challenge";
-      };
       
       locations."/" = {
         proxyPass = "http://127.0.0.1:32400";
