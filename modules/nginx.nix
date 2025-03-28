@@ -3,10 +3,10 @@
     acceptTerms = true;
     defaults = {
       email = "eduaraujobarros@gmail.com";
-      dnsProvider = "cloudflare";
-      environmentFile = "/var/lib/acme/cloudflare-credentials";
-      dnsResolver = "1.1.1.1:53";
-      dnsPropagationCheck = true;
+      # dnsProvider = "cloudflare";
+      # environmentFile = "/var/lib/acme/cloudflare-credentials";
+      # dnsResolver = "1.1.1.1:53";
+      # dnsPropagationCheck = true;
     };
   };
 
@@ -25,6 +25,10 @@
         { addr = "[::]"; port = 80; }
         { addr = "[::]"; port = 443; ssl = true; }
       ];
+
+      locations."/.well-known/acme-challenge" = {
+        root = "/var/lib/acme/acme-challenge/.well-known/acme-challenge";
+      };
       
       locations."/" = {
         proxyPass = "http://127.0.0.1:32400";
