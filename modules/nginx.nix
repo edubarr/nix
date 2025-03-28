@@ -25,6 +25,14 @@
         { addr = "[::]"; port = 80; }
         { addr = "[::]"; port = 443; ssl = true; }
       ];
+
+      # Add this block for ACME HTTP validation
+      locations."/.well-known/acme-challenge" = {
+        root = "/var/lib/acme/acme-challenge/.well-known/acme-challenge";
+        extraConfig = ''
+          allow all;
+        '';
+      };
       
       locations."/" = {
         proxyPass = "http://127.0.0.1:32400";
