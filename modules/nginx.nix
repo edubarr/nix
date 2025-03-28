@@ -4,7 +4,6 @@
     defaults.email = "eduaraujobarros@gmail.com";
     # Use standalone mode for validation
     defaults.webroot = null;
-    defaults.extraLegoFlags = ["--http-01-use-ipv6"];
   };
 
   services.nginx = {
