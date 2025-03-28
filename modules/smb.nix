@@ -31,15 +31,6 @@
         createMask = "0644";
         directoryMask = "0755";
       };
-      hd4 = {
-        path = "/media/hd4/share";
-        comment = "Share for HD4";
-        browseable = true;
-        writable = true;
-        guestOk = false;
-        createMask = "0644";
-        directoryMask = "0755";
-      };
       all = {
         path = "/media/all";
         comment = "Aggregated share from multiple disks";
