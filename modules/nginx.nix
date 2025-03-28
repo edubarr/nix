@@ -2,8 +2,6 @@
   security.acme = {
     acceptTerms = true;
     defaults.email = "eduaraujobarros@gmail.com";
-    # Use standalone mode for validation
-    defaults.webroot = null;
   };
 
   services.nginx = {
@@ -21,6 +19,12 @@
         { addr = "[::]"; port = 80; }
         { addr = "[::]"; port = 443; ssl = true; }
       ];
+
+      # Add specific location for ACME challenges (higher priority than root)
+      locations."/.well-known/acme-challenge/" = {
+        root = "/var/lib/acme/acme-challenge";
+      };
+
       locations."/" = {
         proxyPass = "http://127.0.0.1:32400";
         proxyWebsockets = true;
