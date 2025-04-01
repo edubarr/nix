@@ -15,64 +15,29 @@
     recommendedProxySettings = true;
     recommendedTlsSettings = true;
     
-    virtualHosts."plex.dudu.lat" = {
-      enableACME = true;
-      acmeRoot = null;
-      forceSSL = true;
-      locations."/" = {
-        proxyPass = "http://127.0.0.1:32400";
-        proxyWebsockets = true;
-      };
-    };
+    virtualHosts = 
+      let
+        makeVirtualHost = name: port: {
+          "${name}.dudu.lat" = {
+            enableACME = true;
+            acmeRoot = null;
+            forceSSL = true;
+            locations."/" = {
+              proxyPass = "http://127.0.0.1:${toString port}";
+              proxyWebsockets = true;
+            };
+          };
+        };
 
-    virtualHosts."sonarr.dudu.lat" = {
-      enableACME = true;
-      acmeRoot = null;
-      forceSSL = true;
-      locations."/" = {
-        proxyPass = "http://127.0.0.1:8989";
-        proxyWebsockets = true;
-      };
-    };
-
-    virtualHosts."radarr.dudu.lat" = {
-      enableACME = true;
-      acmeRoot = null;
-      forceSSL = true;
-      locations."/" = {
-        proxyPass = "http://127.0.0.1:7878";
-        proxyWebsockets = true;
-      };
-    };
-
-    virtualHosts."bazarr.dudu.lat" = {
-      enableACME = true;
-      acmeRoot = null;
-      forceSSL = true;
-      locations."/" = {
-        proxyPass = "http://127.0.0.1:6767";
-        proxyWebsockets = true;
-      };
-    };
-
-    virtualHosts."prowlarr.dudu.lat" = {
-      enableACME = true;
-      acmeRoot = null;
-      forceSSL = true;
-      locations."/" = {
-        proxyPass = "http://127.0.0.1:9696";
-        proxyWebsockets = true;
-      };
-    };
-
-    virtualHosts."qbit.dudu.lat" = {
-      enableACME = true;
-      acmeRoot = null;
-      forceSSL = true;
-      locations."/" = {
-        proxyPass = "http://127.0.0.1:8180";
-        proxyWebsockets = true;
-      };
-    };
+        services = [
+          { name = "plex"; port = 32400; }
+          { name = "sonarr"; port = 8989; }
+          { name = "radarr"; port = 7878; }
+          { name = "bazarr"; port = 6767; }
+          { name = "prowlarr"; port = 9696; }
+          { name = "qbit"; port = 8180; }
+        ];
+      in
+        builtins.foldl' (acc: svc: acc // makeVirtualHost svc.name svc.port) {} services;
   };
 }
