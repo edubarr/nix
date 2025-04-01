@@ -21,6 +21,7 @@
     
     virtualHosts."plex.dudu.lat" = {
       enableACME = true;
+      acmeRoot = null;
       forceSSL = true;
       # Listen on IPv6 as well
       listen = [
