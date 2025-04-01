@@ -3,10 +3,14 @@
     acceptTerms = true;
     defaults = {
       email = "eduaraujobarros@gmail.com";
-      # dnsProvider = "cloudflare";
-      # environmentFile = "/var/lib/acme/cloudflare-credentials";
-      # dnsResolver = "1.1.1.1:53";
-      # dnsPropagationCheck = true;
+    };
+    certs."dudu.lat" = {
+      domain = "*.dudu.lat";
+      extraDomainNames = ["dudu.lat"];  # Include apex domain
+      dnsProvider = "cloudflare";  # Match your provider
+      dnsResolver = "1.1.1.1:53";
+      dnsPropagationCheck = true;
+      environmentFile = "/var/lib/acme/cloudflare-credentials";
     };
   };
 
@@ -25,14 +29,6 @@
         { addr = "[::]"; port = 80; }
         { addr = "[::]"; port = 443; ssl = true; }
       ];
-
-      # Add this block for ACME HTTP validation
-      locations."/.well-known/acme-challenge" = {
-        root = "/var/lib/acme/acme-challenge/.well-known/acme-challenge";
-        extraConfig = ''
-          allow all;
-        '';
-      };
       
       locations."/" = {
         proxyPass = "http://127.0.0.1:32400";
