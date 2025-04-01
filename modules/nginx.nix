@@ -36,6 +36,7 @@
           { name = "bazarr"; port = 6767; }
           { name = "prowlarr"; port = 9696; }
           { name = "qbit"; port = 8180; }
+          { name = "heimdall"; port = 40443; }
         ];
       in
         builtins.foldl' (acc: svc: acc // makeVirtualHost svc.name svc.port) {} services;
