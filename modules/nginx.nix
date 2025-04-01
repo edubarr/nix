@@ -3,15 +3,16 @@
     acceptTerms = true;
     defaults = {
       email = "eduaraujobarros@gmail.com";
-    };
-    certs."dudu.lat" = {
-      domain = "*.dudu.lat";
-      extraDomainNames = ["dudu.lat"];  # Include apex domain
       dnsProvider = "cloudflare";  # Match your provider
       dnsResolver = "1.1.1.1:53";
       dnsPropagationCheck = true;
       environmentFile = "/var/lib/acme/cloudflare-credentials";
     };
+    # certs."dudu.lat" = {
+    #   domain = "*.dudu.lat";
+    #   extraDomainNames = ["dudu.lat"];  # Include apex domain
+      
+    # };
   };
 
   services.nginx = {
