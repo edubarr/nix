@@ -48,6 +48,7 @@
     tunnels = {
       "hydra-tunnel" = {
         credentialsFile = "/var/lib/cloudflared/hydra-tunnel-credentials.json";
+        certificateFile = "/var/lib/cloudflared/cert.pem";
         default = "http_status:404";
         
         ingress = {
