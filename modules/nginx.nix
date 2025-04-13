@@ -53,14 +53,14 @@
         
         ingress = {
           # Define your services here
-          "plex.dudu.lat" = "http://localhost:32400";
-          "sonarr.dudu.lat" = "http://localhost:8989";
-          "radarr.dudu.lat" = "http://localhost:7878";
-          "bazarr.dudu.lat" = "http://localhost:6767";
-          "prowlarr.dudu.lat" = "http://localhost:9696";
-          "qbit.dudu.lat" = "http://localhost:8180";
-          "heimdall.dudu.lat" = "http://localhost:4080";
-        };
+          "plex.dudu.lat" = "http://localhost:32400"; # Only plex is exposed
+        #   "sonarr.dudu.lat" = "http://localhost:8989";
+        #   "radarr.dudu.lat" = "http://localhost:7878";
+        #   "bazarr.dudu.lat" = "http://localhost:6767";
+        #   "prowlarr.dudu.lat" = "http://localhost:9696";
+        #   "qbit.dudu.lat" = "http://localhost:8180";
+        #   "heimdall.dudu.lat" = "http://localhost:4080";
+        # };
       };
     };
   };
