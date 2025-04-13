@@ -41,4 +41,26 @@
       in
         builtins.foldl' (acc: svc: acc // makeVirtualHost svc.name svc.port) {} services;
   };
+
+   # Cloudflare Tunnel Configuration
+  services.cloudflared = {
+    enable = true;
+    tunnels = {
+      "hydra-tunnel" = {
+        credentialsFile = "/var/lib/cloudflared/hydra-tunnel-credentials.json";
+        default = "http_status:404";
+        
+        ingress = {
+          # Define your services here
+          "plex.dudu.lat" = "http://localhost:32400";
+          "sonarr.dudu.lat" = "http://localhost:8989";
+          "radarr.dudu.lat" = "http://localhost:7878";
+          "bazarr.dudu.lat" = "http://localhost:6767";
+          "prowlarr.dudu.lat" = "http://localhost:9696";
+          "qbit.dudu.lat" = "http://localhost:8180";
+          "heimdall.dudu.lat" = "http://localhost:4080";
+        };
+      };
+    };
+  };
 }
