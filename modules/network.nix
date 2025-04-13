@@ -5,7 +5,7 @@
     allowedTCPPorts = [ 22 80 443 ];
   };
 
-  networking.tempAddresses = "disabled";
+  networking.tempAddresses = "default";
 
   # Enable the SSH server
   services.openssh.enable = true;
