@@ -60,7 +60,7 @@
         #   "prowlarr.dudu.lat" = "http://localhost:9696";
         #   "qbit.dudu.lat" = "http://localhost:8180";
         #   "heimdall.dudu.lat" = "http://localhost:4080";
-        # };
+        };
       };
     };
   };
