@@ -53,8 +53,8 @@
   };
 
   services.samba-wsdd = {
-  enable = true;
-  openFirewall = true;
+    enable = true;
+    openFirewall = true;
   };
 
   networking.firewall.enable = true;

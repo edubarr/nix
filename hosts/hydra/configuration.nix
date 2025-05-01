@@ -2,8 +2,8 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ./local-packages.nix
-    ../../modules
+    ../../modules # Common modules
+    ./modules # Local modules
     ../../modules/smb.nix
     ../../modules/cockpit.nix
   ];

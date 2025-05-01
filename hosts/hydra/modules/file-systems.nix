@@ -2,7 +2,10 @@
   fileSystems."/media/hd0" = {
     device = "UUID=196ee92b-8e40-4888-9711-392eb6fffd3e";
     fsType = "ext4";
-    options = [ "defaults" "nofail" ];
+    options = [
+      "defaults"
+      "nofail"
+    ];
   };
 
   # fileSystems."/media/hd1" = {
@@ -14,13 +17,19 @@
   fileSystems."/media/hd2" = {
     device = "UUID=0e783558-f6d7-4b74-8761-076f12a195f7";
     fsType = "ext4";
-    options = [ "defaults" "nofail" ];
+    options = [
+      "defaults"
+      "nofail"
+    ];
   };
 
   fileSystems."/media/hd3" = {
     device = "UUID=3f742270-0c88-4f65-9313-55aeb6c31290";
     fsType = "ext4";
-    options = [ "defaults" "nofail" ];
+    options = [
+      "defaults"
+      "nofail"
+    ];
   };
 
   # fileSystems."/media/hd4" = {
@@ -50,10 +59,13 @@
   fileSystems."/media/servarr" = {
     depends = [
       "/media/hd0"
-  ];
+    ];
     device = "/media/hd0/share/servarr_config";
     fsType = "none";
-    options = [ "bind" "nofail" ];
+    options = [
+      "bind"
+      "nofail"
+    ];
   };
 
   # Ensure directories are created at boot
