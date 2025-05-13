@@ -13,6 +13,15 @@
         createMask = "0644";
         directoryMask = "0755";
       };
+      hd1 = {
+        path = "/media/hd1/share";
+        comment = "Share for HD0";
+        browseable = true;
+        writable = true;
+        guestOk = false;
+        createMask = "0644";
+        directoryMask = "0755";
+      };
       hd2 = {
         path = "/media/hd2/share";
         comment = "Share for HD2";
