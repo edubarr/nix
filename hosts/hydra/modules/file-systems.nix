@@ -71,11 +71,11 @@
 
   # Ensure directories are created at boot
   systemd.tmpfiles.rules = [
-    "d /media/hd0 0755 root root -"
-    "d /media/hd1 0755 root root -"
-    "d /media/hd2 0755 root root -"
-    "d /media/hd3 0755 root root -"
-    "d /media/all 0755 root root -"
-    "d /media/servarr 0755 root root -"
+    "d /media/hd0 0755 edubarr root -"
+    "d /media/hd1 0755 edubarr root -"
+    "d /media/hd2 0755 edubarr root -"
+    "d /media/hd3 0755 edubarr root -"
+    "d /media/all 0755 edubarr root -"
+    "d /media/servarr 0755 edubarr root -"
   ];
 }
