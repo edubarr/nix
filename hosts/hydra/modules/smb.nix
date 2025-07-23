@@ -1,53 +1,55 @@
 {
   services.samba = {
     enable = true;
-    securityType = "user";
     openFirewall = true;
-    shares = {
+    settings = {
+      global = {
+        security = "user";
+      };
       hd0 = {
         path = "/media/hd0/share";
         comment = "Share for HD0";
-        browseable = true;
-        writable = true;
-        guestOk = false;
-        createMask = "0644";
-        directoryMask = "0755";
+        browseable = "yes";
+        writable = "yes";
+        "guest ok" = "no";
+        "create mask" = "0644";
+        "directory mask" = "0755";
       };
       hd1 = {
         path = "/media/hd1/share";
-        comment = "Share for HD0";
-        browseable = true;
-        writable = true;
-        guestOk = false;
-        createMask = "0644";
-        directoryMask = "0755";
+        comment = "Share for HD1";
+        browseable = "yes";
+        writable = "yes";
+        "guest ok" = "no";
+        "create mask" = "0644";
+        "directory mask" = "0755";
       };
       hd2 = {
         path = "/media/hd2/share";
         comment = "Share for HD2";
-        browseable = true;
-        writable = true;
-        guestOk = false;
-        createMask = "0644";
-        directoryMask = "0755";
+        browseable = "yes";
+        writable = "yes";
+        "guest ok" = "no";
+        "create mask" = "0644";
+        "directory mask" = "0755";
       };
       hd3 = {
         path = "/media/hd3/share";
         comment = "Share for HD3";
-        browseable = true;
-        writable = true;
-        guestOk = false;
-        createMask = "0644";
-        directoryMask = "0755";
+        browseable = "yes";
+        writable = "yes";
+        "guest ok" = "no";
+        "create mask" = "0644";
+        "directory mask" = "0755";
       };
       all = {
         path = "/media/all";
         comment = "Aggregated share from multiple disks";
-        browseable = true;
-        writable = true;
-        guestOk = false;
-        createMask = "0644";
-        directoryMask = "0755";
+        browseable = "yes";
+        writable = "yes";
+        "guest ok" = "no";
+        "create mask" = "0644";
+        "directory mask" = "0755";
       };
     };
   };
