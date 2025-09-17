@@ -47,7 +47,7 @@
     device = "/media/hd0/share:/media/hd2/share:/media/hd3/share";
     fsType = "fuse.mergerfs";
     options = [
-      "category.create=epmfs"
+      "category.create=pfrd"
       "defaults"
       "fsname=mergerfs"
       "allow_other"
