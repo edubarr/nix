@@ -31,6 +31,7 @@
 
         services = [
           { name = "plex"; port = 32400; }
+          { name = "jellyfin"; port = 8096; }
           { name = "sonarr"; port = 8989; }
           { name = "radarr"; port = 7878; }
           { name = "bazarr"; port = 6767; }
@@ -54,6 +55,7 @@
         ingress = {
           # Define your services here
           "plex.dudu.lat" = "http://localhost:32400"; # Only plex is exposed
+          "jellyfin.dudu.lat" = "http://localhost:8096";
         #   "sonarr.dudu.lat" = "http://localhost:8989";
         #   "radarr.dudu.lat" = "http://localhost:7878";
         #   "bazarr.dudu.lat" = "http://localhost:6767";
