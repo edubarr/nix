@@ -32,11 +32,11 @@
     ];
   };
 
-  # fileSystems."/media/hd4" = {
-  #   device = "UUID=b5fb7a72-96e5-4410-a87e-d1122fb38e8e";
-  #   fsType = "ext4";
-  #   options = [ "defaults" "nofail" ];
-  # };
+  fileSystems."/media/hd4" = {
+    device = "UUID=b5fb7a72-96e5-4410-a87e-d1122fb38e8e";
+    fsType = "ext4";
+    options = [ "defaults" "nofail" ];
+  };
 
   fileSystems."/media/all" = {
     depends = [
