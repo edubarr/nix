@@ -8,11 +8,11 @@
     ];
   };
 
-  # fileSystems."/media/hd1" = {
-  #   device = "UUID=ac247179-e7a3-48bc-8722-610337b038f0";
-  #   fsType = "ext4";
-  #   options = [ "defaults" "nofail" ];
-  # };
+  fileSystems."/media/hd1" = {
+    device = "UUID=ac247179-e7a3-48bc-8722-610337b038f0";
+    fsType = "ext4";
+    options = [ "defaults" "nofail" ];
+  };
 
   fileSystems."/media/hd2" = {
     device = "UUID=0e783558-f6d7-4b74-8761-076f12a195f7";
