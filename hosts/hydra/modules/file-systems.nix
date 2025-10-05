@@ -44,7 +44,7 @@
       "/media/hd2"
       "/media/hd3"
     ];
-    device = "/media/hd0/share:/media/hd2/share:/media/hd3/share";
+    device = "/media/hd0/share:/media/hd1/share:/media/hd2/share:/media/hd3/share:/media/hd4/share";
     fsType = "fuse.mergerfs";
     options = [
       "category.create=pfrd"
