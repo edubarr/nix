@@ -35,6 +35,7 @@
           { name = "sonarr"; port = 8989; }
           { name = "radarr"; port = 7878; }
           { name = "bazarr"; port = 6767; }
+          { name = "overseerr"; port = 5055; }
           { name = "prowlarr"; port = 9696; }
           { name = "qbit"; port = 8180; }
           { name = "heimdall"; port = 4080; }
