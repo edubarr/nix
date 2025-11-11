@@ -32,6 +32,7 @@
         services = [
           { name = "plex"; port = 32400; }
           { name = "jellyfin"; port = 8096; }
+          { name = "lanfin"; port = 8096; }
           { name = "sonarr"; port = 8989; }
           { name = "radarr"; port = 7878; }
           { name = "bazarr"; port = 6767; }
