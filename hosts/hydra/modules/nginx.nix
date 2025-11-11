@@ -18,7 +18,7 @@
     virtualHosts = 
       let
         makeVirtualHost = name: port: {
-          "${name}.dudu.lat" = {
+          "${name}.edubarr.dev" = {
             enableACME = true;
             acmeRoot = null;
             forceSSL = true;
@@ -55,15 +55,15 @@
         
         ingress = {
           # Define your services here
-          "plex.dudu.lat" = "http://localhost:32400";
-          "jellyfin.dudu.lat" = "http://localhost:8096";
-          "jellyseerr.dudu.lat" = "http://localhost:5055";
-        #   "sonarr.dudu.lat" = "http://localhost:8989";
-        #   "radarr.dudu.lat" = "http://localhost:7878";
-        #   "bazarr.dudu.lat" = "http://localhost:6767";
-        #   "prowlarr.dudu.lat" = "http://localhost:9696";
-        #   "qbit.dudu.lat" = "http://localhost:8180";
-        #   "heimdall.dudu.lat" = "http://localhost:4080";
+          "plex.edubarr.dev" = "http://localhost:32400";
+          "jellyfin.edubarr.dev" = "http://localhost:8096";
+          "jellyseerr.edubarr.dev" = "http://localhost:5055";
+        #   "sonarr.edubarr.dev" = "http://localhost:8989";
+        #   "radarr.edubarr.dev" = "http://localhost:7878";
+        #   "bazarr.edubarr.dev" = "http://localhost:6767";
+        #   "prowlarr.edubarr.dev" = "http://localhost:9696";
+        #   "qbit.edubarr.dev" = "http://localhost:8180";
+        #   "heimdall.edubarr.dev" = "http://localhost:4080";
         };
       };
     };
