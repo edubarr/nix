@@ -3,11 +3,12 @@
   services.pihole-ftl = {
     enable = true;
     openFirewallDNS = true;
+    openFirewallWebserver = true;
   };
 
   services.pihole-web = {
     enable = true;
-    openFirewall = true;
+    ports = [ 8080 ];
   };
 
   # Set Pi-hole as DNS server
