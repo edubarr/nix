@@ -7,5 +7,6 @@
     ./file-systems.nix
     ./nginx.nix
     ./network.nix
+    ./pihole.nix
   ];
 }
