@@ -13,6 +13,14 @@
 
   networking.tempAddresses = "default";
 
+  networking.nameservers = [ "192.168.0.10" ];
+
+  # Enable IP forwarding for subnet routing
+  boot.kernel.sysctl = {
+    "net.ipv4.ip_forward" = true;
+    "net.ipv6.conf.all.forwarding" = true;
+  };
+
   # Enable the SSH server
   services.openssh.enable = true;
 
@@ -41,8 +49,8 @@
       exit 0
     fi
 
-    # otherwise authenticate with tailscale
-    ${tailscale}/bin/tailscale up -authkey tskey-example
+    # otherwise authenticate with tailscale and advertise subnet route
+    ${tailscale}/bin/tailscale up -authkey tskey-example --advertise-routes=192.168.0.0/24 --advertise-exit-node
   '';
 };
 }
