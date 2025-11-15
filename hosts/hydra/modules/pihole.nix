@@ -15,6 +15,7 @@
         "2001:4860:4860::8888"  # Google IPv6
       ];
     };
+    listeningMode = "ALL";
   };
 
   services.pihole-web = {
