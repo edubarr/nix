@@ -4,15 +4,6 @@
     enable = true;
     openFirewallDNS = true;
     openFirewallWebserver = true;
-
-    lists = [
-      {
-        url = "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/multi.txt";
-        type = "block";
-        enabled = true;
-        description = "Hagezi Normal List";
-      }
-    ];
   };
 
   services.pihole-ftl.settings = {
