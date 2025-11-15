@@ -44,7 +44,7 @@
     sleep 2
 
     # connect or update tailscale with advertised routes and exit node
-    ${tailscale}/bin/tailscale up -authkey tskey-example --advertise-routes=192.168.0.0/24 --advertise-exit-node
+    ${tailscale}/bin/tailscale up --advertise-routes=192.168.0.0/24 --advertise-exit-node
   '';
 };
 }
