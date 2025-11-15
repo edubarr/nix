@@ -1,6 +1,6 @@
 { pkgs, config, ... }:
 {
-  environment.systemPackages = [ pkgs.tailscale ];
+  environment.systemPackages = [ pkgs.tailscale pkgs.ethtool ];
 
   networking.networkmanager.enable = true;
   networking.firewall = {
@@ -25,12 +25,27 @@
   # Enable tailscale
   services.tailscale.enable = true;
 
+    systemd.services.ethtool-udp-gro = {
+    description = "Enable UDP GRO forwarding optimizations for Tailscale";
+
+    after = [ "network-online.target" ];
+    wants = [ "network-online.target" ];
+    wantedBy = [ "multi-user.target" ];
+
+    serviceConfig.Type = "oneshot";
+
+    script = ''
+      NETDEV=$(${pkgs.iproute2}/bin/ip -o route get 8.8.8.8 | ${pkgs.coreutils}/bin/cut -f 5 -d " ")
+      ${pkgs.ethtool}/bin/ethtool -K $NETDEV rx-udp-gro-forwarding on rx-gro-list off
+    '';
+  };
+
   systemd.services.tailscale-autoconnect = {
   description = "Automatic connection to Tailscale";
 
   # make sure tailscale is running before trying to connect to tailscale
-  after = [ "network-pre.target" "tailscale.service" ];
-  wants = [ "network-pre.target" "tailscale.service" ];
+  after = [ "network-pre.target" "tailscale.service" "ethtool-udp-gro.service" ];
+  wants = [ "network-pre.target" "tailscale.service" "ethtool-udp-gro.service" ];
   wantedBy = [ "multi-user.target" ];
 
   # set this service as a oneshot job
@@ -44,5 +59,5 @@
     # connect or update tailscale with advertised routes and exit node
     ${tailscale}/bin/tailscale up --advertise-routes=192.168.0.0/24 --advertise-exit-node
   '';
-};
+  };
 }
