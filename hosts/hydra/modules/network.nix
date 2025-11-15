@@ -38,18 +38,12 @@
   # set this service as a oneshot job
   serviceConfig.Type = "oneshot";
 
-  # have the job run this shell script
+  # have the job run the init script
   script = with pkgs; ''
     # wait for tailscaled to settle
     sleep 2
 
-    # check if we are already authenticated to tailscale
-    status="$(${tailscale}/bin/tailscale status -json | ${jq}/bin/jq -r .BackendState)"
-    if [ $status = "Running" ]; then # if so, then do nothing
-      exit 0
-    fi
-
-    # otherwise authenticate with tailscale and advertise subnet route
+    # connect or update tailscale with advertised routes and exit node
     ${tailscale}/bin/tailscale up -authkey tskey-example --advertise-routes=192.168.0.0/24 --advertise-exit-node
   '';
 };
