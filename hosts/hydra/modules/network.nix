@@ -13,8 +13,6 @@
 
   networking.tempAddresses = "default";
 
-  networking.nameservers = [ "192.168.0.10" ];
-
   # Enable IP forwarding for subnet routing
   boot.kernel.sysctl = {
     "net.ipv4.ip_forward" = true;

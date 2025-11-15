@@ -14,8 +14,8 @@
         "2606:4700:4700::1111"  # Cloudflare IPv6
         "2001:4860:4860::8888"  # Google IPv6
       ];
+      listeningMode = "ALL";
     };
-    listeningMode = "ALL";
   };
 
   services.pihole-web = {
