@@ -41,6 +41,7 @@
           { name = "qbit"; port = 8180; }
           { name = "heimdall"; port = 4080; }
           { name = "pihole"; port = 8080; }
+          { name = "n8n"; port = 5678; }
         ];
       in
         builtins.foldl' (acc: svc: acc // makeVirtualHost svc.name svc.port) {} services;
