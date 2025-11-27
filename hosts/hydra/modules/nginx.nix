@@ -58,6 +58,7 @@
         
         ingress = {
           # Define your services here
+          "n8n.edubarr.dev" = "http://localhost:5678";
           "plex.edubarr.dev" = "http://localhost:32400";
           "jellyfin.edubarr.dev" = "http://localhost:8096";
           "jellyseerr.edubarr.dev" = "http://localhost:5055";
