@@ -35,16 +35,31 @@
   fileSystems."/media/hd4" = {
     device = "UUID=b5fb7a72-96e5-4410-a87e-d1122fb38e8e";
     fsType = "ext4";
-    options = [ "defaults" "nofail" ];
+    options = [
+      "defaults"
+      "nofail"
+    ];
+  };
+
+    fileSystems."/media/hd5" = {
+    device = "UUID=d4189bb5-5007-4f65-a406-a610f5723f69";
+    fsType = "ext4";
+    options = [
+      "defaults"
+      "nofail"
+    ];
   };
 
   fileSystems."/media/all" = {
     depends = [
       "/media/hd0"
+      "/media/hd1"
       "/media/hd2"
       "/media/hd3"
+      "/media/hd4"
+      "/media/hd5"
     ];
-    device = "/media/hd0/share:/media/hd1/share:/media/hd2/share:/media/hd3/share:/media/hd4/share";
+    device = "/media/hd0/share:/media/hd1/share:/media/hd2/share:/media/hd3/share:/media/hd4/share:/media/hd5/share";
     fsType = "fuse.mergerfs";
     options = [
       "category.create=epmfs"
@@ -76,6 +91,7 @@
     "d /media/hd2 0755 edubarr root -"
     "d /media/hd3 0755 edubarr root -"
     "d /media/hd4 0755 edubarr root -"
+    "d /media/hd5 0755 edubarr root -"
     "d /media/all 0755 edubarr root -"
     "d /media/servarr 0755 edubarr root -"
   ];
