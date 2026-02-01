@@ -41,7 +41,6 @@
           { name = "qbit"; port = 8180; }
           { name = "heimdall"; port = 4080; }
           { name = "pihole"; port = 8080; }
-          { name = "n8n"; port = 5678; }
         ];
       in
         builtins.foldl' (acc: svc: acc // makeVirtualHost svc.name svc.port) {} services;
@@ -58,7 +57,6 @@
         
         ingress = {
           # Define your services here
-          "n8n.edubarr.dev" = "http://localhost:5678";
           "plex.edubarr.dev" = "http://localhost:32400";
           "jellyfin.edubarr.dev" = "http://localhost:8096";
           "jellyseerr.edubarr.dev" = "http://localhost:5055";

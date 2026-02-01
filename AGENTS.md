@@ -1,128 +1,155 @@
-# Agentic Coding Guidelines for NixOS Configuration
+# AGENTS.md - NixOS Configuration Repository
 
-This repository contains a NixOS configuration managed with Nix Flakes. It defines system configurations for hosts (e.g., `hydra`) and Home Manager configurations.
+NixOS system and Home Manager configurations using Nix Flakes for a home server named "hydra".
 
-## 1. Build, Lint, and Test Commands
+## Project Structure
 
-Since this is a declarative NixOS configuration, "building" implies realizing the system configuration.
-
-### Build & Verify
-To verify that the configuration builds correctly without applying it (Dry Run):
-```bash
-# Verify the 'hydra' host configuration
-nix build .#nixosConfigurations.hydra.config.system.build.toplevel --dry-run
+```
+├── flake.nix                 # Main flake entry point
+├── flake.lock                # Pinned dependencies
+├── home-manager/home.nix     # User home configuration
+├── hosts/hydra/
+│   ├── configuration.nix     # Main host config
+│   ├── hardware-configuration.nix
+│   └── modules/              # Host-specific modules
+└── modules/                  # Shared/common modules
 ```
 
-To build the configuration (results in `./result` link):
-```bash
-nix build .#nixosConfigurations.hydra.config.system.build.toplevel
-```
+## Build Commands
 
-### Apply Configuration (If running on NixOS)
 ```bash
-# Apply configuration to the current system (if hostname matches 'hydra')
+# Build and switch to new system configuration
 sudo nixos-rebuild switch --flake .#hydra
+
+# Build without switching (for testing)
+sudo nixos-rebuild build --flake .#hydra
+
+# Home Manager - switch to new configuration
+home-manager switch --flake .#edubarr
+
+# Validate flake structure
+nix flake check
+
+# Show flake outputs
+nix flake show
+
+# Check syntax of a single file
+nix-instantiate --parse path/to/file.nix
+
+# Update all flake inputs
+nix flake update
+
+# Update a specific input
+nix flake lock --update-input nixpkgs
 ```
 
-### Linting & Formatting
-There is no strict linter enforced by CI visible, but adhere to standard Nix formatting.
-- **Format**: Use 2 spaces for indentation.
-- **Check Syntax**: `nix instantiate --parse ./path/to/file.nix`
+## Code Style Guidelines
 
-### Dependency Management
-- **Update Lockfile**: `nix flake update` (Updates `flake.lock`)
-- **Check Flake**: `nix flake check` (Verifies flake outputs validity)
+### File Organization
+- **Host-specific**: `hosts/<hostname>/modules/<feature>.nix`
+- **Shared**: `modules/<feature>.nix`
+- **Aggregators**: Use `default.nix` to import sibling modules
 
-## 2. Code Style & Structure
-
-### Project Structure
-- `flake.nix`: Entry point. Defines inputs (nixpkgs, home-manager) and outputs (nixosConfigurations).
-- `hosts/<hostname>/`: Host-specific configurations.
-  - `configuration.nix`: Main system config for the host.
-  - `hardware-configuration.nix`: Hardware scan (do not edit manually unless necessary).
-  - `modules/`: Host-specific modules.
-- `modules/`: Shared NixOS modules usable by any host.
-- `home-manager/`: Home Manager user configurations.
-
-### Nix Language Conventions
-- **Indentation**: ALWAYS use **2 spaces**. Do not use tabs.
-- **Naming**:
-  - **Files**: kebab-case (e.g., `garbage-collector.nix`, `system-services.nix`).
-  - **Attributes**: camelCase (e.g., `extraSpecialArgs`, `homeStateVersion`).
-- **Imports**:
-  - Use relative paths: `imports = [ ./module.nix ../../shared.nix ];`
-  - Group imports at the top of the file.
+### Formatting
+- 2-space indentation (no tabs)
+- Opening brace on same line as expression
+- Semicolons at end of attribute assignments
 
 ### Module Pattern
-Most files in `modules/` are simple attribute sets or functions returning attribute sets.
-
-**Simple Module (Attribute Set):**
 ```nix
+# Without arguments:
+{ services.example.enable = true; }
+
+# With arguments:
+{ pkgs, config, ... }:
+{ environment.systemPackages = [ pkgs.example ]; }
+```
+
+### Attribute Sets and Lists
+```nix
+# Short - one line
+{ enable = true; port = 8080; }
+[ "item1" "item2" ]
+
+# Long - line breaks
 {
-  services.openssh.enable = true;
-  networking.firewall.allowedTCPPorts = [ 22 ];
+  enable = true;
+  settings = { port = 8080; };
 }
 ```
 
-**Function Module (Argument Pattern):**
-If you need access to `pkgs`, `config`, or `lib`:
+### Imports
 ```nix
-{ config, pkgs, ... }:
-{
-  environment.systemPackages = with pkgs; [ vim git ];
-}
+{ imports = [ ./bluetooth.nix ./docker.nix ./network.nix ]; }
+```
+Use relative paths, list alphabetically when practical.
+
+### Naming Conventions
+- File names: kebab-case (`file-systems.nix`)
+- Variables: camelCase (`homeStateVersion`, `makeSystem`)
+
+### String Interpolation
+```nix
+"Hello ${name}"
+script = ''
+  ${pkgs.coreutils}/bin/ls -la
+'';
 ```
 
-### Flake Inputs
-- Defined in `flake.nix`.
-- Access inputs in modules via `specialArgs` (NixOS) or `extraSpecialArgs` (Home Manager).
-- Example: `inputs.nixpkgs` or `inputs.home-manager`.
-
-## 3. Implementation Rules for Agents
-
-### Modifying Configuration
-1.  **Analyze Context**: Before adding a service/package, check `modules/` or `hosts/<host>/modules/` to see if a similar module exists.
-2.  **Do Not Duplicate**: If a feature (e.g., Docker) is already defined in a shared module, reuse it or enhance it rather than creating a duplicate in `configuration.nix`.
-3.  **Packages**:
-    - Add system-wide packages to `environment.systemPackages`.
-    - Add user-specific packages in `home-manager/home.nix` or strict user modules.
-    - Use `pkgs.<package_name>` (e.g., `pkgs.git`).
-    - Verify package names using `nix search nixpkgs <name>` or checking search.nixos.org if possible (or assume standard nixpkgs names).
-
-### Editing `flake.nix`
-- **Caution**: `flake.nix` is the core. Avoid changing `inputs` unless requested (e.g., upgrading nixpkgs version).
-- **New Hosts**: To add a new host, add a new entry in the `hosts` list variable or the `nixosConfigurations` output.
+### Package References
+- Always use full paths: `${pkgs.docker-compose}/bin/docker-compose`
+- Use `with pkgs;` sparingly
 
 ### Error Handling
-- Nix is lazy. Errors often appear only at build time.
-- If a value is optional, use `lib.mkOption` with `default` if writing a complex module, or simply `lib.mkIf` to guard configurations.
-- Ensure all opening braces `{` and lists `[` are properly closed.
+- Use `nofail` for non-critical mounts
+- Use `after` and `wants` for service dependencies
+- Use `Restart = "on-failure"` for auto-recovery
 
-### Safety
-- **Secrets**: Do NOT commit actual secrets (passwords, private keys) to git. Use `sops-nix` or `git-crypt` if implemented, or place headers reminding to use environment variables/separate files.
-- **State Version**: Do NOT change `system.stateVersion` or `home.stateVersion` unless you are performing a major state upgrade and understand the implications (it affects data storage paths).
+### Secrets
+- Store in `/var/lib/<service>/` outside repo
+- Reference via `environmentFile` or `credentialsFile`
+- Never commit credentials
 
-## 4. Common Tasks
+## Adding Configuration
 
-**Adding a Package:**
-Find the relevant `system-services.nix`, `local-packages.nix`, or `home.nix`.
+### New Host Module
+1. Create `hosts/hydra/modules/<feature>.nix`
+2. Add to `hosts/hydra/modules/default.nix`
+
+### New Shared Module
+1. Create `modules/<feature>.nix`
+2. Add to `modules/default.nix`
+
+### New Host
+1. Create `hosts/<hostname>/configuration.nix`
+2. Create `hosts/<hostname>/hardware-configuration.nix`
+3. Add entry to `hosts` in `flake.nix`
+
+## Common Patterns
+
+### Systemd Services
 ```nix
-environment.systemPackages = with pkgs; [
-  ripgrep
-  bat
-];
+systemd.services.my-service = {
+  description = "Description";
+  after = [ "network.target" ];
+  wantedBy = [ "multi-user.target" ];
+  serviceConfig = {
+    Type = "oneshot";
+    ExecStart = "${pkgs.example}/bin/command";
+  };
+};
 ```
 
-**Adding a Service:**
-Create a new file in `modules/` (e.g., `modules/monitoring.nix`) and import it in the host's configuration.
-
+### Firewall Rules
 ```nix
-# modules/monitoring.nix
-{ config, pkgs, ... }:
-{
-  services.grafana.enable = true;
-}
+networking.firewall = {
+  enable = true;
+  allowedTCPPorts = [ 22 80 443 ];
+  trustedInterfaces = [ "tailscale0" ];
+};
 ```
 
-**Refactoring:**
-Move inline configuration from `hosts/<host>/configuration.nix` to a dedicated file in `hosts/<host>/modules/` or `modules/` if it can be shared.
+## Environment
+- NixOS: 25.05 (unstable)
+- System: x86_64-linux
+- Inputs: nixpkgs (nixos-unstable), home-manager (follows nixpkgs)

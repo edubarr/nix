@@ -8,6 +8,5 @@
     ./nginx.nix
     ./network.nix
     ./pihole.nix
-    ./n8n.nix
   ];
 }
