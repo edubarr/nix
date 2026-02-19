@@ -11,6 +11,11 @@ let
     "jellyfin"
     "jellyseerr"
   ];
+  ensureServarrNetwork = pkgs.writeShellScript "ensure-servarr-network" ''
+    if ! ${pkgs.docker}/bin/docker network inspect servarr_network >/dev/null 2>&1; then
+      ${pkgs.docker}/bin/docker network create servarr_network
+    fi
+  '';
 in
 {
   virtualisation.oci-containers = {
@@ -127,7 +132,7 @@ in
       serviceConfig = {
         Type = "oneshot";
         RemainAfterExit = true;
-        ExecStart = "${pkgs.runtimeShell} -c '${pkgs.docker}/bin/docker network inspect servarr_network >/dev/null 2>&1 || ${pkgs.docker}/bin/docker network create servarr_network'";
+        ExecStart = "${ensureServarrNetwork}";
       };
     };
   } // lib.genAttrs (map (name: "docker-${name}") containerNames) (_: {
