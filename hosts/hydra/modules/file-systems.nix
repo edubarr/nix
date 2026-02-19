@@ -41,14 +41,14 @@
     ];
   };
 
-    fileSystems."/media/hd5" = {
-    device = "UUID=cb663595-905a-4727-ba96-8f287c7cb69f";
-    fsType = "ext4";
-    options = [
-      "defaults"
-      "nofail"
-    ];
-  };
+  #   fileSystems."/media/hd5" = {
+  #   device = "UUID=cb663595-905a-4727-ba96-8f287c7cb69f";
+  #   fsType = "ext4";
+  #   options = [
+  #     "defaults"
+  #     "nofail"
+  #   ];
+  # };
 
   fileSystems."/media/all" = {
     depends = [
@@ -57,9 +57,9 @@
       "/media/hd2"
       "/media/hd3"
       "/media/hd4"
-      "/media/hd5"
+      # "/media/hd5"
     ];
-    device = "/media/hd0/share:/media/hd1/share:/media/hd2/share:/media/hd3/share:/media/hd4/share:/media/hd5/share";
+    device = "/media/hd0/share:/media/hd1/share:/media/hd2/share:/media/hd3/share:/media/hd4/share";
     fsType = "fuse.mergerfs";
     options = [
       "category.create=epmfs"
