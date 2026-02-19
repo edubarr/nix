@@ -39,10 +39,7 @@ in
           "/media/servarr/qbittorrent:/config"
           "/media/all/servarr/downloads:/media/downloads"
         ];
-        extraOptions = [
-          "--network=servarr_network"
-          "--device=/dev/dri:/dev/dri"
-        ];
+        extraOptions = [ "--network=servarr_network" ];
       };
 
       prowlarr = {
@@ -130,9 +127,7 @@ in
       serviceConfig = {
         Type = "oneshot";
         RemainAfterExit = true;
-        ExecStart = ''
-          ${pkgs.docker}/bin/docker network inspect servarr_network >/dev/null 2>&1 || ${pkgs.docker}/bin/docker network create servarr_network
-        '';
+        ExecStart = "${pkgs.runtimeShell} -c '${pkgs.docker}/bin/docker network inspect servarr_network >/dev/null 2>&1 || ${pkgs.docker}/bin/docker network create servarr_network'";
       };
     };
   } // lib.genAttrs (map (name: "docker-${name}") containerNames) (_: {
