@@ -6,7 +6,7 @@
     ./nginx.nix
     ./network.nix
     ./pihole.nix
-    ./servarr-docker.nix
+    ./servarr.nix
     ./smb.nix
   ];
 }

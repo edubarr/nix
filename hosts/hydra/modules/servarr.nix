@@ -146,4 +146,8 @@ in
     ];
     requires = [ "media-servarr.mount" ];
   });
+
+  systemd.tmpfiles.rules = [
+    "d /srv/configs/servarr 0755 root root -"
+  ];
 }
