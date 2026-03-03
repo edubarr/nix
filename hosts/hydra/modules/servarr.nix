@@ -23,10 +23,10 @@ in
     containers = {
       plex = {
         image = "plexinc/pms-docker:latest";
-        environmentFiles = [ "/media/servarr/.env" ];
+        environmentFiles = [ "/srv/configs/servarr/.env" ];
         ports = [ "32400:32400/tcp" ];
         volumes = [
-          "/media/servarr/plexmediaserver:/config"
+          "/srv/configs/servarr/plexmediaserver:/config"
           "/media:/media"
         ];
         extraOptions = [
@@ -37,11 +37,11 @@ in
 
       qbittorrent = {
         image = "lscr.io/linuxserver/qbittorrent:latest";
-        environmentFiles = [ "/media/servarr/.env" ];
+        environmentFiles = [ "/srv/configs/servarr/.env" ];
         environment = { WEBUI_PORT = "8180"; };
         ports = [ "8180:8180" ];
         volumes = [
-          "/media/servarr/qbittorrent:/config"
+          "/srv/configs/servarr/qbittorrent:/config"
           "/media/all/servarr/downloads:/media/downloads"
         ];
         extraOptions = [ "--network=servarr_network" ];
@@ -49,18 +49,18 @@ in
 
       prowlarr = {
         image = "ghcr.io/linuxserver/prowlarr:latest";
-        environmentFiles = [ "/media/servarr/.env" ];
+        environmentFiles = [ "/srv/configs/servarr/.env" ];
         ports = [ "9696:9696" ];
-        volumes = [ "/media/servarr/prowlarr:/config" ];
+        volumes = [ "/srv/configs/servarr/prowlarr:/config" ];
         extraOptions = [ "--network=servarr_network" ];
       };
 
       sonarr = {
         image = "ghcr.io/linuxserver/sonarr:latest";
-        environmentFiles = [ "/media/servarr/.env" ];
+        environmentFiles = [ "/srv/configs/servarr/.env" ];
         ports = [ "8989:8989" ];
         volumes = [
-          "/media/servarr/sonarr:/config"
+          "/srv/configs/servarr/sonarr:/config"
           "/media/all/servarr:/media"
         ];
         extraOptions = [ "--network=servarr_network" ];
@@ -68,10 +68,10 @@ in
 
       radarr = {
         image = "ghcr.io/linuxserver/radarr:latest";
-        environmentFiles = [ "/media/servarr/.env" ];
+        environmentFiles = [ "/srv/configs/servarr/.env" ];
         ports = [ "7878:7878" ];
         volumes = [
-          "/media/servarr/radarr:/config"
+          "/srv/configs/servarr/radarr:/config"
           "/media/all/servarr:/media"
         ];
         extraOptions = [ "--network=servarr_network" ];
@@ -79,10 +79,10 @@ in
 
       bazarr = {
         image = "ghcr.io/linuxserver/bazarr:latest";
-        environmentFiles = [ "/media/servarr/.env" ];
+        environmentFiles = [ "/srv/configs/servarr/.env" ];
         ports = [ "6767:6767" ];
         volumes = [
-          "/media/servarr/bazarr:/config"
+          "/srv/configs/servarr/bazarr:/config"
           "/media/all/servarr:/media"
         ];
         extraOptions = [ "--network=servarr_network" ];
@@ -90,21 +90,21 @@ in
 
       heimdall = {
         image = "lscr.io/linuxserver/heimdall:latest";
-        environmentFiles = [ "/media/servarr/.env" ];
+        environmentFiles = [ "/srv/configs/servarr/.env" ];
         ports = [
           "4080:80"
           "40443:443"
         ];
-        volumes = [ "/media/servarr/heimdallconfig:/config" ];
+        volumes = [ "/srv/configs/servarr/heimdallconfig:/config" ];
         extraOptions = [ "--network=servarr_network" ];
       };
 
       jellyfin = {
         image = "lscr.io/linuxserver/jellyfin:latest";
-        environmentFiles = [ "/media/servarr/.env" ];
+        environmentFiles = [ "/srv/configs/servarr/.env" ];
         ports = [ "8096:8096" ];
         volumes = [
-          "/media/servarr/jellyfin:/config"
+          "/srv/configs/servarr/jellyfin:/config"
           "/media:/media"
         ];
         extraOptions = [
@@ -115,9 +115,9 @@ in
 
       jellyseerr = {
         image = "fallenbagel/jellyseerr:latest";
-        environmentFiles = [ "/media/servarr/.env" ];
+        environmentFiles = [ "/srv/configs/servarr/.env" ];
         ports = [ "5055:5055" ];
-        volumes = [ "/media/servarr/overseerr:/app/config" ];
+        volumes = [ "/srv/configs/servarr/overseerr:/app/config" ];
         extraOptions = [ "--network=servarr_network" ];
       };
     };
@@ -137,14 +137,12 @@ in
     };
   } // lib.genAttrs (map (name: "docker-${name}") containerNames) (_: {
     after = [
-      "media-servarr.mount"
       "docker-network-servarr-network.service"
     ];
     wants = [
-      "media-servarr.mount"
       "docker-network-servarr-network.service"
     ];
-    requires = [ "media-servarr.mount" ];
+    requires = [ "docker-network-servarr-network.service" ];
   });
 
   systemd.tmpfiles.rules = [

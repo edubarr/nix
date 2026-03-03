@@ -71,18 +71,6 @@
     ];
   };
 
-  # Bind mount servarr from its source directory on hd0
-  fileSystems."/media/servarr" = {
-    depends = [
-      "/media/hd0"
-    ];
-    device = "/media/hd0/share/servarr_config";
-    fsType = "none";
-    options = [
-      "bind"
-      "nofail"
-    ];
-  };
 
   # Ensure directories are created at boot
   systemd.tmpfiles.rules = [
@@ -94,6 +82,5 @@
     "d /media/hd4 0755 edubarr root -"
     "d /media/hd5 0755 edubarr root -"
     "d /media/all 0755 edubarr root -"
-    "d /media/servarr 0755 edubarr root -"
   ];
 }
