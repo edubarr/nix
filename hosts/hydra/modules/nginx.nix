@@ -40,6 +40,7 @@
           { name = "prowlarr"; port = 9696; }
           { name = "qbit"; port = 8180; }
           { name = "heimdall"; port = 4080; }
+          { name = "glance"; port = 8085; }
           { name = "pihole"; port = 8080; }
         ];
       in
@@ -60,12 +61,6 @@
           "plex.edubarr.dev" = "http://localhost:32400";
           "jellyfin.edubarr.dev" = "http://localhost:8096";
           "jellyseerr.edubarr.dev" = "http://localhost:5055";
-        #   "sonarr.edubarr.dev" = "http://localhost:8989";
-        #   "radarr.edubarr.dev" = "http://localhost:7878";
-        #   "bazarr.edubarr.dev" = "http://localhost:6767";
-        #   "prowlarr.edubarr.dev" = "http://localhost:9696";
-        #   "qbit.edubarr.dev" = "http://localhost:8180";
-        #   "heimdall.edubarr.dev" = "http://localhost:4080";
         };
       };
     };

@@ -1,12 +1,12 @@
 {
   imports = [
-    ./local-packages.nix
-    ./cockpit.nix
-    ./smb.nix
-    ./servarr-docker.nix
     ./file-systems.nix
+    ./glance.nix
+    ./local-packages.nix
     ./nginx.nix
     ./network.nix
     ./pihole.nix
+    ./servarr-docker.nix
+    ./smb.nix
   ];
 }
