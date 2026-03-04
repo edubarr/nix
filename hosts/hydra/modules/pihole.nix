@@ -20,8 +20,14 @@
   networking.firewall.allowedTCPPorts = [ 53 8080 ];
   networking.firewall.allowedUDPPorts = [ 53 ];
 
-  # Set Pi-hole as DNS server
-  networking.nameservers = [ "127.0.0.1" ];
+  # Set Pi-hole as DNS server with fallback resolvers
+  networking.nameservers = [
+    "127.0.0.1"
+    "1.1.1.1"
+    "8.8.8.8"
+    "2606:4700:4700::1111"
+    "2001:4860:4860::8888"
+  ];
 
   systemd.tmpfiles.rules = [
     "d /srv/configs/pihole 0755 root root -"

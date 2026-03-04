@@ -3,6 +3,7 @@
   environment.systemPackages = [ pkgs.tailscale pkgs.ethtool ];
 
   networking.networkmanager.enable = true;
+  networking.networkmanager.dns = "none";
   networking.firewall = {
     enable = true;
     allowedTCPPorts = [ 22 80 443 ];
