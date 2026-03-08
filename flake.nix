@@ -24,6 +24,14 @@
           hostname = "hydra";
           stateVersion = version;
         }
+        {
+          hostname = "griffin";
+          stateVersion = version;
+        }
+        {
+          hostname = "typhon";
+          stateVersion = version;
+        }
       ];
 
       makeSystem =
