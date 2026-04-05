@@ -51,15 +51,7 @@
   # };
 
   fileSystems."/media/all" = {
-    depends = [
-      "/media/hd0"
-      "/media/hd1"
-      "/media/hd2"
-      "/media/hd3"
-      "/media/hd4"
-      # "/media/hd5"
-    ];
-    device = "/media/hd0/share:/media/hd1/share:/media/hd2/share:/media/hd3/share:/media/hd4/share";
+    device = "/media/hd*/share";
     fsType = "fuse.mergerfs";
     options = [
       "category.create=epmfs"
@@ -67,6 +59,7 @@
       "defaults"
       "fsname=mergerfs"
       "allow_other"
+      "nofail"
       "x-systemd.fail-gracefully"
     ];
   };
