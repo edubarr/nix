@@ -51,7 +51,7 @@
   # };
 
   fileSystems."/media/all" = {
-    device = "/media/hd*/share";
+    device = "/media/hd0/share:/media/hd1/share:/media/hd2/share:/media/hd3/share:/media/hd4/share";
     fsType = "fuse.mergerfs";
     options = [
       "category.create=epmfs"
