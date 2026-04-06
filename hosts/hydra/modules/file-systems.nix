@@ -33,7 +33,7 @@
   };
 
   fileSystems."/media/hd4" = {
-    device = "UUID=b5fb7a72-96e5-4410-a87e-d1122fb38e8e";
+    device = "UUID=2bc98c6d-5c3e-440b-9cb5-c64625be9d6b";
     fsType = "ext4";
     options = [
       "defaults"
