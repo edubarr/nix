@@ -59,7 +59,6 @@
       "defaults"
       "fsname=mergerfs"
       "allow_other"
-      "nofail"
       "x-systemd.fail-gracefully"
     ];
   };
