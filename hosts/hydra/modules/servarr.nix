@@ -7,10 +7,10 @@ let
     "sonarr"
     "radarr"
     "bazarr"
-    "heimdall"
     "jellyfin"
     "jellyseerr"
   ];
+
   ensureServarrNetwork = pkgs.writeShellScript "ensure-servarr-network" ''
     if ! ${pkgs.docker}/bin/docker network inspect servarr_network >/dev/null 2>&1; then
       ${pkgs.docker}/bin/docker network create servarr_network
@@ -35,7 +35,7 @@ in
         ports = [ "32400:32400/tcp" ];
         volumes = [
           "/srv/configs/servarr/plexmediaserver:/config"
-          "/media:/media"
+          "/media/all/servarr:/media"
         ];
         extraOptions = [
           "--network=servarr_network"
@@ -46,7 +46,9 @@ in
       qbittorrent = {
         image = "lscr.io/linuxserver/qbittorrent:latest";
         environmentFiles = [ "/srv/configs/servarr/.env" ];
-        environment = { WEBUI_PORT = "8180"; };
+        environment = {
+          WEBUI_PORT = "8180";
+        };
         ports = [ "8180:8180" ];
         volumes = [
           "/srv/configs/servarr/qbittorrent:/config"
@@ -96,24 +98,13 @@ in
         extraOptions = [ "--network=servarr_network" ];
       };
 
-      heimdall = {
-        image = "lscr.io/linuxserver/heimdall:latest";
-        environmentFiles = [ "/srv/configs/servarr/.env" ];
-        ports = [
-          "4080:80"
-          "40443:443"
-        ];
-        volumes = [ "/srv/configs/servarr/heimdallconfig:/config" ];
-        extraOptions = [ "--network=servarr_network" ];
-      };
-
       jellyfin = {
         image = "lscr.io/linuxserver/jellyfin:latest";
         environmentFiles = [ "/srv/configs/servarr/.env" ];
         ports = [ "8096:8096" ];
         volumes = [
           "/srv/configs/servarr/jellyfin:/config"
-          "/media:/media"
+          "/media/all/servarr:/media"
         ];
         extraOptions = [
           "--network=servarr_network"
@@ -131,27 +122,36 @@ in
     };
   };
 
-  systemd.services = {
-    docker-network-servarr-network = {
-      description = "Create docker network servarr_network";
-      after = [ "docker.service" ];
-      wants = [ "docker.service" ];
-      wantedBy = [ "multi-user.target" ];
-      serviceConfig = {
-        Type = "oneshot";
-        RemainAfterExit = true;
-        ExecStart = "${ensureServarrNetwork}";
+  systemd.services =
+    {
+      docker-network-servarr-network = {
+        description = "Create docker network servarr_network";
+        after = [ "docker.service" ];
+        wants = [ "docker.service" ];
+        wantedBy = [ "multi-user.target" ];
+        serviceConfig = {
+          Type = "oneshot";
+          RemainAfterExit = true;
+          ExecStart = "${ensureServarrNetwork}";
+        };
       };
-    };
-  } // lib.genAttrs (map (name: "docker-${name}") containerNames) (_: {
-    after = [
-      "docker-network-servarr-network.service"
-    ];
-    wants = [
-      "docker-network-servarr-network.service"
-    ];
-    requires = [ "docker-network-servarr-network.service" ];
-  });
+    }
+    // lib.genAttrs (map (name: "docker-${name}") containerNames) (_: {
+      after = [
+        "docker.service"
+        "docker-network-servarr-network.service"
+        "media-all.mount"
+      ];
+      wants = [
+        "docker.service"
+        "docker-network-servarr-network.service"
+        "media-all.mount"
+      ];
+      requires = [
+        "docker-network-servarr-network.service"
+        "media-all.mount"
+      ];
+    });
 
   systemd.tmpfiles.rules = [
     "d /srv/configs/servarr 0755 root root -"
