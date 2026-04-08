@@ -25,6 +25,12 @@
             locations."/" = {
               proxyPass = "http://127.0.0.1:${toString port}";
               proxyWebsockets = true;
+              extraConfig = ''
+                proxy_connect_timeout 600s;
+                proxy_send_timeout 600s;
+                proxy_read_timeout 600s;
+                send_timeout 600s;
+              '';
             };
           };
         };
