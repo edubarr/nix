@@ -51,6 +51,15 @@
         "create mask" = "0644";
         "directory mask" = "0755";
       };
+      hd5 = {
+        path = "/media/hd5/share";
+        comment = "Share for HD5";
+        browseable = "yes";
+        writable = "yes";
+        "guest ok" = "no";
+        "create mask" = "0644";
+        "directory mask" = "0755";
+      };
       all = {
         path = "/media/all";
         comment = "Aggregated share from multiple disks";
