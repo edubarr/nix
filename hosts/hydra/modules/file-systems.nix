@@ -1,6 +1,6 @@
 {
   fileSystems."/media/hd0" = {
-    device = "UUID=196ee92b-8e40-4888-9711-392eb6fffd3e";
+    device = "UUID=ac247179-e7a3-48bc-8722-610337b038f0";
     fsType = "ext4";
     options = [
       "defaults"
@@ -9,7 +9,7 @@
   };
 
   fileSystems."/media/hd1" = {
-    device = "UUID=ac247179-e7a3-48bc-8722-610337b038f0";
+    device = "UUID=3f742270-0c88-4f65-9313-55aeb6c31290";
     fsType = "ext4";
     options = [ "defaults" "nofail" ];
   };
@@ -24,7 +24,7 @@
   };
 
   fileSystems."/media/hd3" = {
-    device = "UUID=3f742270-0c88-4f65-9313-55aeb6c31290";
+    device = "UUID=3206ac36-782f-4a00-83f1-967181742299";
     fsType = "ext4";
     options = [
       "defaults"
@@ -33,7 +33,7 @@
   };
 
   fileSystems."/media/hd4" = {
-    device = "UUID=2bc98c6d-5c3e-440b-9cb5-c64625be9d6b";
+    device = "UUID=58ec7053-c8e8-4fdb-b623-3e2e340b913a";
     fsType = "ext4";
     options = [
       "defaults"
@@ -41,17 +41,17 @@
     ];
   };
 
-  #   fileSystems."/media/hd5" = {
-  #   device = "UUID=cb663595-905a-4727-ba96-8f287c7cb69f";
-  #   fsType = "ext4";
-  #   options = [
-  #     "defaults"
-  #     "nofail"
-  #   ];
-  # };
+    fileSystems."/media/hd5" = {
+    device = "UUID=cf7c371a-decf-48b7-b1b2-6bfb3f2d2bcf";
+    fsType = "ext4";
+    options = [
+      "defaults"
+      "nofail"
+    ];
+  };
 
   fileSystems."/media/all" = {
-    device = "/media/hd0/share:/media/hd1/share:/media/hd2/share:/media/hd3/share:/media/hd4/share";
+    device = "/media/hd0/share:/media/hd1/share:/media/hd2/share:/media/hd3/share:/media/hd4/share:/media/hd5/share";
     fsType = "fuse.mergerfs";
     options = [
       "category.create=epmfs"
