@@ -42,6 +42,15 @@
         "create mask" = "0644";
         "directory mask" = "0755";
       };
+      bkp = {
+        path = "/media/hd3/bkp";
+        comment = "Backup share";
+        browseable = "yes";
+        writable = "yes";
+        "guest ok" = "no";
+        "create mask" = "0644";
+        "directory mask" = "0755";
+      };
       hd4 = {
         path = "/media/hd4/share";
         comment = "Share for HD4";
