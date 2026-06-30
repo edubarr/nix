@@ -8,5 +8,6 @@
     ./pihole.nix
     ./servarr.nix
     ./smb.nix
+    ./dev-env.nix
   ];
 }

@@ -8,7 +8,6 @@
     ./locale.nix
     ./network.nix
     ./nix.nix
-    ./dev-env.nix
     ./sound.nix
     ./swap.nix
     ./system-services.nix
