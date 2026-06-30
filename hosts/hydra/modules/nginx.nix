@@ -47,6 +47,7 @@
           { name = "qbit"; port = 8180; }
           { name = "heimdall"; port = 4080; }
           { name = "glance"; port = 8085; }
+          { name = "ittools"; port = 8086; }
           { name = "pihole"; port = 8080; }
         ];
       in
@@ -67,6 +68,7 @@
           "plex.edubarr.dev" = "http://localhost:32400";
           "jellyfin.edubarr.dev" = "http://localhost:8096";
           "jellyseerr.edubarr.dev" = "http://localhost:5055";
+          "ittools.edubarr.dev" = "http://localhost:8086";
         };
       };
     };
