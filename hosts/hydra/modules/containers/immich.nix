@@ -106,7 +106,7 @@ in
     };
 
   systemd.tmpfiles.rules = [
-    "d /srv/configs/immich 0750 root root -"
+    "d /srv/configs/immich 0755 root root -"
     "d /srv/configs/immich/model-cache 0750 root root -"
     "d /srv/configs/immich/postgres 0750 root root -"
   ];

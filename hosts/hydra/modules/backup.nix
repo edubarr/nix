@@ -6,7 +6,7 @@ let
     set -euo pipefail
 
     dumpDir="/srv/configs/immich/dump"
-    ${pkgs.coreutils}/bin/install -d -m 0750 "$dumpDir"
+    ${pkgs.coreutils}/bin/install -d -m 0755 "$dumpDir"
 
     dbUser="$(${pkgs.gnugrep}/bin/grep -E '^POSTGRES_USER=' ${immichEnv} | ${pkgs.coreutils}/bin/cut -d= -f2- || true)"
     dbName="$(${pkgs.gnugrep}/bin/grep -E '^POSTGRES_DB=' ${immichEnv} | ${pkgs.coreutils}/bin/cut -d= -f2- || true)"
