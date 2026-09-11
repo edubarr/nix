@@ -33,7 +33,7 @@ Docker/OCI services live in `modules/containers/`:
 
 ## Backup
 
-`backup.nix` mirrors data to the two 4TB backup disks (`hd4`, `hd5`) with daily systemd timers using `rsync`. `hd4` is the source of truth: configs and the Immich library are written under `bkp/hydra/<original path>`, and `backup-mirror` then mirrors the whole `hd4/bkp` tree to `hd5`. Deleted or changed files are retained under `/media/hdN/.backup/`.
+`backup.nix` mirrors data to the two 4TB backup disks (`hd4`, `hd5`) with daily systemd timers using `rsync`. `hd4` is the source of truth: configs and the Immich library are written under `bkp/hydra/<original path>`, and `backup-mirror` then mirrors the whole `hd4/bkp` tree to `hd5`. Deleted or changed config/library files are retained under `/media/hd4/.backup/{configs,immich}/` for 30 days, then pruned.
 
 | Source | Written to |
 |--------|-----------|
@@ -41,7 +41,7 @@ Docker/OCI services live in `modules/containers/`:
 | `/media/hd3/immich` | `/media/hd4/bkp/hydra/media/hd3/immich` |
 | `/media/hd4/bkp` (Samba + backups) | `/media/hd5/bkp` (full mirror) |
 
-`backup-mirror` runs last, so `hd5` ends up as a full mirror of the `hd4` backup tree. The Immich PostgreSQL data directory and model cache are excluded from the mirror; a consistent `pg_dump` is written to `/srv/configs/immich/dump/immich.sql.gz` before each run. Offsite upload (Cloudflare R2 / Backblaze B2) is planned.
+`backup-mirror` runs last, so `hd5` ends up as a full mirror of the `hd4` backup tree. The Immich PostgreSQL data directory and model cache are excluded from the mirror; a consistent `pg_dump` is written to `/srv/configs/immich/dump/immich.sql.gz` before each run, with dated copies kept in `history/daily` (last 7) and `history/weekly` (last 4) under the same `dump` directory. Offsite upload (Cloudflare R2 / Backblaze B2) is planned.
 
 ## Apply
 
