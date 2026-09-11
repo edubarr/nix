@@ -42,14 +42,14 @@ in
       };
 
       immich-redis = {
-        image = "docker.io/valkey/valkey:9@sha256:70739f85ad2ee01a726a965584a0f94895f01b0c60b3cc8b0aeef11eaa6888cf";
+        image = "docker.io/valkey/valkey:9";
         extraOptions = [ "--network=immich_network" ];
       };
 
       immich-database = {
-        image = "ghcr.io/immich-app/postgres:14-vectorchord0.4.3-pgvectors0.2.0@sha256:bcf63357191b76a916ae5eb93464d65c07511da41e3bf7a8416db519b40b1c23";
+        image = "ghcr.io/immich-app/postgres:18-vectorchord1.1.1-pgvector0.8.5";
         environmentFiles = [ "/srv/configs/immich/.env" ];
-        volumes = [ "/srv/configs/immich/postgres:/var/lib/postgresql/data" ];
+        volumes = [ "/srv/configs/immich/postgres:/var/lib/postgresql" ];
         extraOptions = [
           "--network=immich_network"
           "--shm-size=128mb"
