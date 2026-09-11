@@ -23,3 +23,4 @@ This directory has services and behavior that run only on the homelab server hos
 
 - Shared defaults live in `modules/` at repo root.
 - New host module files are imported from `hosts/hydra/modules/default.nix`.
+- Immich reads `/srv/configs/immich/.env`; copy `immich.env.example` there and set real passwords.

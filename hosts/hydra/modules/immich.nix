@@ -58,43 +58,52 @@ in
     };
   };
 
-  systemd.services = lib.genAttrs (map (name: "docker-${name}") containerNames) (_: {
-    after = [
-      "docker.service"
-      "docker-network-immich-network.service"
-    ];
-    wants = [
-      "docker.service"
-      "docker-network-immich-network.service"
-    ];
-    requires = [ "docker-network-immich-network.service" ];
-  });
+  systemd.services =
+    lib.genAttrs (map (name: "docker-${name}") containerNames) (_: {
+      after = [
+        "docker.service"
+        "docker-network-immich-network.service"
+      ];
+      wants = [
+        "docker.service"
+        "docker-network-immich-network.service"
+      ];
+      requires = [ "docker-network-immich-network.service" ];
+    })
+    // {
+      docker-immich-server = {
+        after = [
+          "docker.service"
+          "docker-network-immich-network.service"
+          "docker-immich-database.service"
+          "docker-immich-redis.service"
+          "media-all.mount"
+        ];
+        wants = [
+          "docker.service"
+          "docker-network-immich-network.service"
+          "docker-immich-database.service"
+          "docker-immich-redis.service"
+          "media-all.mount"
+        ];
+        requires = [
+          "docker-network-immich-network.service"
+          "media-all.mount"
+        ];
+      };
 
-  systemd.services.docker-immich-server = {
-    after = [
-      "docker-immich-database.service"
-      "docker-immich-redis.service"
-      "media-all.mount"
-    ];
-    wants = [
-      "docker-immich-database.service"
-      "docker-immich-redis.service"
-      "media-all.mount"
-    ];
-    requires = [ "media-all.mount" ];
-  };
-
-  systemd.services.docker-network-immich-network = {
-    description = "Create docker network immich_network";
-    after = [ "docker.service" ];
-    wants = [ "docker.service" ];
-    wantedBy = [ "multi-user.target" ];
-    serviceConfig = {
-      Type = "oneshot";
-      RemainAfterExit = true;
-      ExecStart = "${ensureImmichNetwork}";
+      docker-network-immich-network = {
+        description = "Create docker network immich_network";
+        after = [ "docker.service" ];
+        wants = [ "docker.service" ];
+        wantedBy = [ "multi-user.target" ];
+        serviceConfig = {
+          Type = "oneshot";
+          RemainAfterExit = true;
+          ExecStart = "${ensureImmichNetwork}";
+        };
+      };
     };
-  };
 
   systemd.tmpfiles.rules = [
     "d /srv/configs/immich 0750 root root -"
