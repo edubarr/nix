@@ -15,6 +15,7 @@ This directory has services and behavior that run only on the homelab server hos
 - `smb.nix`: samba file sharing.
 - `file-systems.nix`: mounts and storage layout.
 - `glance.nix`: dashboard service.
+- `immich.nix`: internal photo and video backup service.
 - `local-packages.nix`: host-local package additions.
 - `containers.nix`: host-local container settings.
 

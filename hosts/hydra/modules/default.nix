@@ -2,6 +2,7 @@
   imports = [
     ./file-systems.nix
     ./glance.nix
+    ./immich.nix
     ./it-tools.nix
     ./local-packages.nix
     ./nginx.nix

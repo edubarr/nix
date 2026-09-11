@@ -47,6 +47,7 @@
           { name = "qbit"; port = 8180; }
           { name = "heimdall"; port = 4080; }
           { name = "glance"; port = 8085; }
+          { name = "immich"; port = 2283; }
           { name = "ittools"; port = 8086; }
           { name = "pihole"; port = 8080; }
         ];
