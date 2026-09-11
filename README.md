@@ -16,7 +16,7 @@ Shared base modules are in `modules/`, and host-specific behavior lives in `host
 
 - Media server and automation (Servarr stack)
 - Network-wide ad blocking (Pi-hole)
-- Secure remote access (Tailscale VPN)
+- Secure remote access (NetBird VPN)
 - File sharing (Samba)
 - Reverse proxy with automatic SSL (Nginx + Let's Encrypt)
 - External access via Cloudflare Tunnels
@@ -44,7 +44,7 @@ Shared base modules are in `modules/`, and host-specific behavior lives in `host
 | Nginx | 80/443 | Reverse proxy with ACME/SSL |
 | SSH | 22 | Secure shell access |
 | Samba | 445 | Windows file sharing |
-| Tailscale | - | VPN mesh network (exit node) |
+| NetBird | - | VPN mesh network (exit node) |
 
 All services are available at `<service>.edubarr.dev` with automatic SSL certificates via Cloudflare DNS challenge.
 
@@ -143,8 +143,8 @@ nix flake check
 
 Hydra-specific network notes:
 
-- **Tailscale**: Configured as exit node with subnet routing for `192.168.0.0/24`
-- **Firewall**: Ports 22, 80, 443 open; Tailscale interface trusted
+- **NetBird**: Configured as routing peer (exit node + subnet route for `192.168.0.0/24`); DNS managed by NetBird with Pi-hole as nameserver
+- **Firewall**: Ports 22, 80, 443 open; NetBird (`wt0`) interface trusted
 - **Cloudflare Tunnel**: Public access to Plex, Jellyfin, and Jellyseerr
 
 ## Secrets

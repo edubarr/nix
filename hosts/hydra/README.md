@@ -15,7 +15,7 @@
 
 ## Host Modules
 
-- `network.nix`: firewall, SSH, tailscale, and routing setup.
+- `network.nix`: firewall, SSH, netbird, and routing setup.
 - `nginx.nix`: reverse proxy, ACME, and cloudflared tunnel.
 - `smb.nix`: samba file sharing.
 - `file-systems.nix`: mounts and storage layout.

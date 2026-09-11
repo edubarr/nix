@@ -8,7 +8,7 @@ This directory has services and behavior that run only on the homelab server hos
 
 ## Modules
 
-- `network.nix`: firewall, SSH, tailscale, and routing setup.
+- `network.nix`: firewall, SSH, netbird, and routing setup.
 - `nginx.nix`: reverse proxy, ACME, and cloudflared tunnel.
 - `file-systems.nix`: mounts and storage layout.
 - `smb.nix`: samba file sharing.
