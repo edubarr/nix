@@ -1,15 +1,11 @@
 {
   imports = [
-    ./file-systems.nix
-    ./glance.nix
-    ./immich.nix
-    ./it-tools.nix
-    ./local-packages.nix
-    ./nginx.nix
-    ./network.nix
-    ./pihole.nix
-    ./servarr.nix
-    ./smb.nix
+    ./containers
     ./dev-env.nix
+    ./file-systems.nix
+    ./local-packages.nix
+    ./network.nix
+    ./nginx.nix
+    ./smb.nix
   ];
 }

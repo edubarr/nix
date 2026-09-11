@@ -17,11 +17,18 @@
 
 - `network.nix`: firewall, SSH, tailscale, and routing setup.
 - `nginx.nix`: reverse proxy, ACME, and cloudflared tunnel.
-- `pihole.nix`: DNS ad-blocking.
-- `servarr.nix`: media automation stack.
 - `smb.nix`: samba file sharing.
 - `file-systems.nix`: mounts and storage layout.
-- `glance.nix`, `local-packages.nix`, `containers.nix`: additional host-local behavior.
+- `local-packages.nix`: host-local package additions.
+- `dev-env.nix`: host-local development environment.
+
+Docker/OCI services live in `modules/containers/`:
+
+- `pihole.nix`: DNS ad-blocking.
+- `servarr.nix`: media automation stack.
+- `glance.nix`: dashboard service.
+- `immich.nix`: internal photo and video backup service.
+- `it-tools.nix`: internal developer utilities.
 
 ## Apply
 
