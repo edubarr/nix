@@ -28,7 +28,7 @@ in
         environmentFiles = [ "/srv/configs/immich/.env" ];
         ports = [ "2283:2283/tcp" ];
         volumes = [
-          "/media/all/immich:/data"
+          "/media/hd3/immich:/data"
           "/etc/localtime:/etc/localtime:ro"
         ];
         extraOptions = [ "--network=immich_network" ];
@@ -77,18 +77,18 @@ in
           "docker-network-immich-network.service"
           "docker-immich-database.service"
           "docker-immich-redis.service"
-          "media-all.mount"
+          "media-hd3.mount"
         ];
         wants = [
           "docker.service"
           "docker-network-immich-network.service"
           "docker-immich-database.service"
           "docker-immich-redis.service"
-          "media-all.mount"
+          "media-hd3.mount"
         ];
         requires = [
           "docker-network-immich-network.service"
-          "media-all.mount"
+          "media-hd3.mount"
         ];
       };
 
