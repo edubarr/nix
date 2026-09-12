@@ -17,7 +17,7 @@
     
     virtualHosts = 
       let
-        makeVirtualHost = name: port: {
+        makeVirtualHost = { name, port, maxUploadSize ? null }: {
           "${name}.edubarr.dev" = {
             enableACME = true;
             acmeRoot = null;
@@ -26,6 +26,7 @@
               proxyPass = "http://127.0.0.1:${toString port}";
               proxyWebsockets = true;
               extraConfig = ''
+                ${if maxUploadSize != null then "client_max_body_size ${maxUploadSize};" else ""}
                 proxy_connect_timeout 600s;
                 proxy_send_timeout 600s;
                 proxy_read_timeout 600s;
@@ -47,12 +48,12 @@
           { name = "qbit"; port = 8180; }
           { name = "heimdall"; port = 4080; }
           { name = "glance"; port = 8085; }
-          { name = "immich"; port = 2283; }
+          { name = "immich"; port = 2283; maxUploadSize = "10g"; }
           { name = "ittools"; port = 8086; }
           { name = "pihole"; port = 8080; }
         ];
       in
-        builtins.foldl' (acc: svc: acc // makeVirtualHost svc.name svc.port) {} services;
+        builtins.foldl' (acc: svc: acc // makeVirtualHost svc) {} services;
   };
 
    # Cloudflare Tunnel Configuration
