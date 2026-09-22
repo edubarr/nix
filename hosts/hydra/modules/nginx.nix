@@ -43,7 +43,7 @@
           { name = "sonarr"; port = 8989; }
           { name = "radarr"; port = 7878; }
           { name = "bazarr"; port = 6767; }
-          { name = "jellyseerr"; port = 5055; }
+          { name = "seerr"; port = 5055; }
           { name = "prowlarr"; port = 9696; }
           { name = "qbit"; port = 8180; }
           { name = "heimdall"; port = 4080; }
@@ -69,7 +69,7 @@
           # Define your services here
           "plex.edubarr.dev" = "http://localhost:32400";
           "jellyfin.edubarr.dev" = "http://localhost:8096";
-          "jellyseerr.edubarr.dev" = "http://localhost:5055";
+          "seerr.edubarr.dev" = "http://localhost:5055";
           "ittools.edubarr.dev" = "http://localhost:8086";
         };
       };

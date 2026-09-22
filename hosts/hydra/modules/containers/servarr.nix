@@ -8,7 +8,7 @@ let
     "radarr"
     "bazarr"
     "jellyfin"
-    "jellyseerr"
+    "seerr"
   ];
 
   ensureServarrNetwork = pkgs.writeShellScript "ensure-servarr-network" ''
@@ -112,12 +112,15 @@ in
         ];
       };
 
-      jellyseerr = {
-        image = "fallenbagel/jellyseerr:latest";
+      seerr = {
+        image = "ghcr.io/seerr-team/seerr:latest";
         environmentFiles = [ "/srv/configs/servarr/.env" ];
         ports = [ "5055:5055" ];
-        volumes = [ "/srv/configs/servarr/overseerr:/app/config" ];
-        extraOptions = [ "--network=servarr_network" ];
+        volumes = [ "/srv/configs/servarr/seerr:/app/config" ];
+        extraOptions = [
+          "--init"
+          "--network=servarr_network"
+        ];
       };
     };
   };
