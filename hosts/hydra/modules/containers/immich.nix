@@ -18,7 +18,7 @@ in
     backend = "docker";
     containers = {
       immich-server = {
-        image = "ghcr.io/immich-app/immich-server:v3";
+        image = "ghcr.io/immich-app/immich-server:v3.3.3";
         environment = {
           DB_HOSTNAME = "immich-database";
           IMMICH_MACHINE_LEARNING_URL = "http://immich-machine-learning:3003";
@@ -35,7 +35,7 @@ in
       };
 
       immich-machine-learning = {
-        image = "ghcr.io/immich-app/immich-machine-learning:v3";
+        image = "ghcr.io/immich-app/immich-machine-learning:v3.3.3";
         environmentFiles = [ "/srv/configs/immich/.env" ];
         volumes = [ "/srv/configs/immich/model-cache:/cache" ];
         extraOptions = [ "--network=immich_network" ];
