@@ -5,7 +5,7 @@
 ## Role
 
 - Always-on home services host.
-- Runs media, DNS, reverse proxy, VPN, and storage workloads.
+- Runs media, reverse proxy, VPN, and storage workloads.
 
 ## Files
 
@@ -25,7 +25,6 @@
 
 Docker/OCI services live in `modules/containers/`:
 
-- `pihole.nix`: DNS ad-blocking.
 - `servarr.nix`: media automation stack.
 - `glance.nix`: dashboard service.
 - `immich.nix`: internal photo and video backup service.

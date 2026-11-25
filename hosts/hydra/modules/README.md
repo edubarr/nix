@@ -20,7 +20,6 @@ This directory has services and behavior that run only on the homelab server hos
 
 Docker/OCI services live in `containers/`:
 
-- `pihole.nix`: DNS ad-blocking.
 - `servarr.nix`: media automation stack.
 - `glance.nix`: dashboard service.
 - `immich.nix`: internal photo and video backup service.

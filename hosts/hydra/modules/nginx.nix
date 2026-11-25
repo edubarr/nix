@@ -50,7 +50,6 @@
           { name = "glance"; port = 8085; }
           { name = "immich"; port = 2283; maxUploadSize = "10g"; }
           { name = "ittools"; port = 8086; }
-          { name = "pihole"; port = 8080; }
         ];
       in
         builtins.foldl' (acc: svc: acc // makeVirtualHost svc) {} services;

@@ -15,7 +15,6 @@ Shared base modules are in `modules/`, and host-specific behavior lives in `host
 `hydra` provides:
 
 - Media server and automation (Servarr stack)
-- Network-wide ad blocking (Pi-hole)
 - Secure remote access (NetBird VPN)
 - File sharing (Samba)
 - Reverse proxy with automatic SSL (Nginx + Let's Encrypt)
@@ -39,7 +38,6 @@ Shared base modules are in `modules/`, and host-specific behavior lives in `host
 ### Infrastructure
 | Service | Port | Description |
 |---------|------|-------------|
-| Pi-hole | 8080 | DNS ad blocking |
 | Cockpit | 9090 | Web-based server management |
 | Nginx | 80/443 | Reverse proxy with ACME/SSL |
 | SSH | 22 | Secure shell access |
@@ -52,7 +50,7 @@ All services are available at `<service>.edubarr.dev` with automatic SSL certifi
 
 | Host | Type | Focus |
 |------|------|-------|
-| `hydra` | Headless server | Media, DNS, reverse proxy, storage, remote access |
+| `hydra` | Headless server | Media, reverse proxy, storage, remote access |
 | `griffin` | Laptop | Wayland (Hyprland), hybrid Intel+NVIDIA setup |
 | `typhon` | Desktop | Wayland (Hyprland), NVIDIA desktop setup |
 
@@ -143,7 +141,7 @@ nix flake check
 
 Hydra-specific network notes:
 
-- **NetBird**: Configured as routing peer (exit node + subnet route for `192.168.0.0/24`); DNS managed by NetBird with Pi-hole as nameserver
+- **NetBird**: Configured as routing peer (exit node + subnet route for `192.168.0.0/24`); DNS managed by NetBird
 - **Firewall**: Ports 22, 80, 443 open; NetBird (`wt0`) interface trusted
 - **Cloudflare Tunnel**: Public access to Plex, Jellyfin, and Jellyseerr
 
