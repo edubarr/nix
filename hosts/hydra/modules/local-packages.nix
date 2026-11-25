@@ -5,5 +5,6 @@
     git
     htop
     screen
+    jq
   ];
 }
