@@ -5,7 +5,8 @@
       email = "eduaraujobarros@gmail.com";
       dnsProvider = "cloudflare";
       dnsResolver = "1.1.1.1:53";
-      dnsPropagationCheck = true;
+      dnsAuthoritativePropagationCheck = true;
+      dnsRecursivePropagationCheck = true;
       environmentFile = "/var/lib/acme/cloudflare-credentials";
     };
   };
